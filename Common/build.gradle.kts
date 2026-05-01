@@ -9,6 +9,6 @@ dependencies {
 
 multiloader {
     mixins {
-        clientMixin("BeaconScreen\$BeaconPowerButtonMixin")
+        clientMixin("BeaconScreen\u0024BeaconPowerButtonMixin")
     }
 }

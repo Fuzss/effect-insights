@@ -1,9 +1,9 @@
-package fuzs.effectinsights.client.gui.component;
+package fuzs.effectinsights.common.client.gui.component;
 
 import com.google.common.collect.ImmutableList;
-import fuzs.effectinsights.EffectInsights;
-import fuzs.effectinsights.config.ClientConfig;
-import fuzs.tooltipinsights.api.v1.client.gui.component.TooltipComponentExtractor;
+import fuzs.effectinsights.common.EffectInsights;
+import fuzs.effectinsights.common.config.ClientConfig;
+import fuzs.tooltipinsights.common.api.v1.client.gui.component.TooltipComponentExtractor;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;

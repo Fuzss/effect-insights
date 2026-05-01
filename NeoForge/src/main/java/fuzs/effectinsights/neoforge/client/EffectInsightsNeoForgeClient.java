@@ -1,9 +1,9 @@
 package fuzs.effectinsights.neoforge.client;
 
-import fuzs.effectinsights.EffectInsights;
-import fuzs.effectinsights.client.EffectInsightsClient;
-import fuzs.effectinsights.data.client.ModLanguageProvider;
-import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
+import fuzs.effectinsights.common.EffectInsights;
+import fuzs.effectinsights.common.client.EffectInsightsClient;
+import fuzs.effectinsights.common.data.client.ModLanguageProvider;
+import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import fuzs.puzzleslib.neoforge.api.data.v2.core.DataProviderHelper;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.Mod;

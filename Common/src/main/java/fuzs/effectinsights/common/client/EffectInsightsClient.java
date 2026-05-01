@@ -1,15 +1,15 @@
-package fuzs.effectinsights.client;
+package fuzs.effectinsights.common.client;
 
-import fuzs.effectinsights.EffectInsights;
-import fuzs.effectinsights.client.gui.tooltip.MobEffectTooltipLines;
-import fuzs.effectinsights.client.handler.EffectTooltipHandler;
-import fuzs.effectinsights.client.handler.FoodTooltipHandler;
-import fuzs.effectinsights.config.ClientConfig;
-import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
-import fuzs.puzzleslib.api.client.event.v1.gui.GatherEffectScreenTooltipCallback;
-import fuzs.puzzleslib.api.client.event.v1.gui.ItemTooltipCallback;
-import fuzs.puzzleslib.api.event.v1.core.EventPhase;
-import fuzs.tooltipinsights.api.v1.client.handler.TooltipDescriptionsHandler;
+import fuzs.effectinsights.common.EffectInsights;
+import fuzs.effectinsights.common.client.gui.tooltip.MobEffectTooltipLines;
+import fuzs.effectinsights.common.client.handler.EffectTooltipHandler;
+import fuzs.effectinsights.common.client.handler.FoodTooltipHandler;
+import fuzs.effectinsights.common.config.ClientConfig;
+import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
+import fuzs.puzzleslib.common.api.client.event.v1.gui.GatherEffectScreenTooltipCallback;
+import fuzs.puzzleslib.common.api.client.event.v1.gui.ItemTooltipCallback;
+import fuzs.puzzleslib.common.api.event.v1.core.EventPhase;
+import fuzs.tooltipinsights.common.api.v1.client.handler.TooltipDescriptionsHandler;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;

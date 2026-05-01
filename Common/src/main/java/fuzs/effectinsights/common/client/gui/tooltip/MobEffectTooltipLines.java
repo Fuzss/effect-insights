@@ -1,13 +1,13 @@
-package fuzs.effectinsights.client.gui.tooltip;
+package fuzs.effectinsights.common.client.gui.tooltip;
 
 import com.google.common.collect.ImmutableList;
-import fuzs.effectinsights.EffectInsights;
-import fuzs.effectinsights.config.ClientConfig;
-import fuzs.tooltipinsights.api.v1.client.gui.tooltip.DescriptionLines;
-import fuzs.tooltipinsights.api.v1.client.gui.tooltip.InternalNameLines;
-import fuzs.tooltipinsights.api.v1.client.gui.tooltip.ModNameLines;
-import fuzs.tooltipinsights.api.v1.client.gui.tooltip.TooltipLinesExtractor;
-import fuzs.tooltipinsights.api.v1.config.AbstractClientConfig;
+import fuzs.effectinsights.common.EffectInsights;
+import fuzs.effectinsights.common.config.ClientConfig;
+import fuzs.tooltipinsights.common.api.v1.client.gui.tooltip.DescriptionLines;
+import fuzs.tooltipinsights.common.api.v1.client.gui.tooltip.InternalNameLines;
+import fuzs.tooltipinsights.common.api.v1.client.gui.tooltip.ModNameLines;
+import fuzs.tooltipinsights.common.api.v1.client.gui.tooltip.TooltipLinesExtractor;
+import fuzs.tooltipinsights.common.api.v1.config.AbstractClientConfig;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffectInstance;

@@ -1,8 +1,8 @@
 package fuzs.effectinsights.fabric.client;
 
-import fuzs.effectinsights.EffectInsights;
-import fuzs.effectinsights.client.EffectInsightsClient;
-import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
+import fuzs.effectinsights.common.EffectInsights;
+import fuzs.effectinsights.common.client.EffectInsightsClient;
+import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import net.fabricmc.api.ClientModInitializer;
 
 public class EffectInsightsFabricClient implements ClientModInitializer {

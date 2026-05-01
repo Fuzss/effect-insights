@@ -1,9 +1,10 @@
 {
+    "minecraft": "26.1.2",
     "mod": {
         "id": "effectinsights",
         "group": "fuzs.effectinsights",
         "name": "Effect Insights",
-        "version": "21.11.4",
+        "version": "26.1.0",
         "authors": [
             "Fuzs"
         ],
@@ -44,13 +45,13 @@
     ],
     "links": [
         {
-            "name": "github",
-            "slug": "effectinsights"
-        },
-        {
             "name": "curseforge",
             "slug": "effect-insights",
             "id": "891326"
+        },
+        {
+            "name": "github",
+            "slug": "effect-insights"
         },
         {
             "name": "modrinth",

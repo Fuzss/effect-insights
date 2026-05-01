@@ -1,11 +1,11 @@
-package fuzs.effectinsights.client.handler;
+package fuzs.effectinsights.common.client.handler;
 
-import fuzs.effectinsights.EffectInsights;
-import fuzs.effectinsights.client.gui.component.EffectComponents;
-import fuzs.effectinsights.client.gui.tooltip.MobEffectTooltipLines;
-import fuzs.effectinsights.config.ClientConfig;
-import fuzs.tooltipinsights.api.v1.client.handler.TooltipDescriptionsHandler;
-import fuzs.tooltipinsights.api.v1.config.ItemDescriptionMode;
+import fuzs.effectinsights.common.EffectInsights;
+import fuzs.effectinsights.common.client.gui.component.EffectComponents;
+import fuzs.effectinsights.common.client.gui.tooltip.MobEffectTooltipLines;
+import fuzs.effectinsights.common.config.ClientConfig;
+import fuzs.tooltipinsights.common.api.v1.client.handler.TooltipDescriptionsHandler;
+import fuzs.tooltipinsights.common.api.v1.config.ItemDescriptionMode;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;

@@ -1,9 +1,9 @@
-package fuzs.effectinsights.mixin.client;
+package fuzs.effectinsights.common.mixin.client;
 
-import fuzs.effectinsights.EffectInsights;
-import fuzs.effectinsights.client.gui.tooltip.MobEffectTooltipLines;
-import fuzs.effectinsights.config.ClientConfig;
-import fuzs.puzzleslib.api.client.gui.v2.tooltip.TooltipBuilder;
+import fuzs.effectinsights.common.EffectInsights;
+import fuzs.effectinsights.common.client.gui.tooltip.MobEffectTooltipLines;
+import fuzs.effectinsights.common.config.ClientConfig;
+import fuzs.puzzleslib.common.api.client.gui.v2.tooltip.TooltipBuilder;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;

@@ -1,8 +1,8 @@
-package fuzs.effectinsights.config;
+package fuzs.effectinsights.common.config;
 
-import fuzs.puzzleslib.api.config.v3.Config;
-import fuzs.puzzleslib.api.config.v3.ConfigCore;
-import fuzs.tooltipinsights.api.v1.config.AbstractClientConfig;
+import fuzs.puzzleslib.common.api.config.v3.Config;
+import fuzs.puzzleslib.common.api.config.v3.ConfigCore;
+import fuzs.tooltipinsights.common.api.v1.config.AbstractClientConfig;
 
 public class ClientConfig extends AbstractClientConfig {
     @Config
