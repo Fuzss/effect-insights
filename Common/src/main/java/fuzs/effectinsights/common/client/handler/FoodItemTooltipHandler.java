@@ -27,7 +27,7 @@ import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
-public class FoodTooltipHandler {
+public class FoodItemTooltipHandler {
 
     public static void onItemTooltip(ItemStack itemStack, List<Component> tooltipLines, Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag) {
         if (!EffectInsights.CONFIG.get(ClientConfig.class).effectItemTooltips.consumablesEffectTooltips) {

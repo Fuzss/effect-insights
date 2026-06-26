@@ -2,28 +2,26 @@ package fuzs.effectinsights.common.config;
 
 import fuzs.puzzleslib.common.api.config.v3.Config;
 import fuzs.puzzleslib.common.api.config.v3.ConfigCore;
-import fuzs.tooltipinsights.common.api.v1.config.AbstractClientConfig;
+import fuzs.tooltipinsights.common.api.v1.config.StyledTooltipsConfig;
+import fuzs.tooltipinsights.common.api.v1.config.TooltipComponentsConfig;
 
-public class ClientConfig extends AbstractClientConfig {
+public class ClientConfig implements ConfigCore {
     @Config
-    public final EffectWidgetTooltips effectWidgetTooltips = new EffectWidgetTooltips();
+    public final StyledTooltipsConfig<EffectTooltipComponents> effectWidgetTooltips = new StyledTooltipsConfig<>(new EffectTooltipComponents());
     @Config
     public final EffectItemTooltips effectItemTooltips = new EffectItemTooltips();
     @Config
-    public final EffectWidgetTooltips effectBeaconTooltips = new EffectWidgetTooltips();
+    public final StyledTooltipsConfig<EffectTooltipComponents> effectBeaconTooltips = new StyledTooltipsConfig<>(new EffectTooltipComponents());
 
-    public static class EffectWidgetTooltips extends ItemTooltips {
-        @Config
-        public final EffectTooltipComponents widgetTooltipLines = new EffectTooltipComponents();
-    }
-
-    public static class EffectItemTooltips extends ItemTooltips {
+    public static class EffectItemTooltips extends StyledTooltipsConfig<TooltipComponentsConfig> {
         @Config
         public final EffectDescriptionTargets itemDescriptionTargets = new EffectDescriptionTargets();
-        @Config
-        public final TooltipComponents itemTooltipLines = new TooltipComponents();
         @Config(description = "Display potion effects for consumable item tooltips, such as food or the totem of undying.")
         public boolean consumablesEffectTooltips = true;
+
+        public EffectItemTooltips() {
+            super(new TooltipComponentsConfig());
+        }
     }
 
     public static class EffectDescriptionTargets implements ConfigCore {
@@ -39,9 +37,7 @@ public class ClientConfig extends AbstractClientConfig {
         public boolean suspiciousStew = true;
     }
 
-    public static class EffectTooltipComponents extends TooltipComponents {
-        @Config(description = "Add the effect name and duration to tooltips.")
-        public boolean displayName = true;
+    public static class EffectTooltipComponents extends TooltipComponentsConfig {
         @Config(description = "Add attributes granted by an effect to tooltips.")
         public boolean effectAttributes = true;
     }
