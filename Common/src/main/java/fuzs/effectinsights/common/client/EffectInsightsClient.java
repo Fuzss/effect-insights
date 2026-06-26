@@ -2,14 +2,15 @@ package fuzs.effectinsights.common.client;
 
 import fuzs.effectinsights.common.EffectInsights;
 import fuzs.effectinsights.common.client.handler.EffectItemTooltipHandler;
-import fuzs.effectinsights.common.client.handler.EffectWidgetTooltipHandler;
 import fuzs.effectinsights.common.client.handler.FoodItemTooltipHandler;
+import fuzs.effectinsights.common.client.handler.SingleEffectTooltipHandler;
 import fuzs.effectinsights.common.config.ClientConfig;
 import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import fuzs.puzzleslib.common.api.client.event.v1.gui.GatherEffectScreenTooltipCallback;
 import fuzs.puzzleslib.common.api.client.event.v1.gui.ItemTooltipCallback;
 import fuzs.puzzleslib.common.api.event.v1.core.EventPhase;
 import fuzs.tooltipinsights.common.api.v1.client.handler.TooltipDescriptionsHandler;
+import fuzs.tooltipinsights.common.api.v1.config.StyledTooltipsConfig;
 import fuzs.tooltipinsights.common.api.v1.config.TooltipDescriptionMode;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.Holder;
@@ -43,6 +44,11 @@ public class EffectInsightsClient implements ClientModConstructor {
 
         tooltipLines.clear();
         tooltipLines.add(mobEffect.getEffect().value().getDisplayName());
-        new EffectWidgetTooltipHandler(mobEffect).onGatherTooltipComponents(screen.minecraft, tooltipLines);
+        new SingleEffectTooltipHandler(mobEffect) {
+            @Override
+            protected StyledTooltipsConfig<ClientConfig.EffectTooltipComponents> getStyleConfig() {
+                return EffectInsights.CONFIG.get(ClientConfig.class).effectWidgetTooltips;
+            }
+        }.onGatherTooltipComponents(screen.minecraft, tooltipLines);
     }
 }
