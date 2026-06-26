@@ -1,12 +1,15 @@
 package fuzs.effectinsights.common.mixin.client;
 
 import fuzs.effectinsights.common.EffectInsights;
-import fuzs.effectinsights.common.client.gui.tooltip.MobEffectTooltipLines;
+import fuzs.effectinsights.common.client.handler.BeaconTooltipHandler;
 import fuzs.effectinsights.common.config.ClientConfig;
 import fuzs.puzzleslib.common.api.client.gui.v2.tooltip.TooltipBuilder;
+import fuzs.tooltipinsights.common.api.v1.config.TooltipDescriptionMode;
 import net.minecraft.client.gui.components.AbstractButton;
+import net.minecraft.client.gui.screens.inventory.BeaconScreen;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
@@ -18,6 +21,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Mixin(targets = "net.minecraft.client.gui.screens.inventory.BeaconScreen$BeaconPowerButton")
@@ -28,22 +33,33 @@ abstract class BeaconScreen$BeaconPowerButtonMixin extends AbstractButton {
     @Shadow
     @Final
     protected int tier;
+    @Shadow
+    @Final
+    BeaconScreen this$0;
 
     public BeaconScreen$BeaconPowerButtonMixin(int i, int j, int k, int l, Component component) {
         super(i, j, k, l, component);
     }
 
-    @Inject(method = "setEffect", at = @At("RETURN"))
-    protected void setEffect(Holder<MobEffect> holder, CallbackInfo callback) {
-        // TODO add a disabled option, which is then split from not being active to prevent vanilla
-        if (EffectInsights.CONFIG.get(ClientConfig.class).effectBeaconTooltips.itemDescriptions.isActive()) {
-            MobEffectInstance mobEffect = new MobEffectInstance(holder,
-                    0,
-                    this.effectinsights$getBeaconEffectAmplifier(holder));
-            List<Component> tooltipLines = MobEffectTooltipLines.getBeaconTooltipLines(mobEffect);
-            TooltipBuilder.create(tooltipLines).build(this);
+    @Inject(method = "setEffect", at = @At("TAIL"))
+    protected void setEffect(Holder<MobEffect> effect, CallbackInfo callback) {
+        if (EffectInsights.CONFIG.get(ClientConfig.class).effectBeaconTooltips.tooltipDescriptions
+                == TooltipDescriptionMode.DISABLED) {
+            return;
         }
+
+        TooltipBuilder.create().setLines(() -> {
+            List<Component> tooltipLines = new ArrayList<>(Arrays.asList(this.createEffectDescription(effect)));
+            MobEffectInstance mobEffect = new MobEffectInstance(effect,
+                    0,
+                    this.effectinsights$getBeaconEffectAmplifier(effect));
+            new BeaconTooltipHandler(mobEffect).onGatherTooltipComponents(this.this$0.minecraft, tooltipLines);
+            return tooltipLines;
+        }).build(this);
     }
+
+    @Shadow
+    protected abstract MutableComponent createEffectDescription(Holder<MobEffect> effect);
 
     @Unique
     private int effectinsights$getBeaconEffectAmplifier(Holder<MobEffect> holder) {

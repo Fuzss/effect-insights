@@ -21,7 +21,7 @@ public abstract class PotionContentsLines extends TooltipLinesExtractor<MobEffec
     }
 
     @Override
-    protected final Stream<Component> getTooltipLines(MobEffectInstance mobEffect) {
+    public final Stream<Component> getTooltipLines(MobEffectInstance mobEffect, int maxWidth) {
         List<Component> tooltipLines = new ArrayList<>();
         TickRateManager tickRateManager = Minecraft.getInstance().level.tickRateManager();
         PotionContents.addPotionTooltip(Collections.singleton(mobEffect),

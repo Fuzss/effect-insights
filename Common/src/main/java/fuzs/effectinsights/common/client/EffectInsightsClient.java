@@ -1,15 +1,16 @@
 package fuzs.effectinsights.common.client;
 
 import fuzs.effectinsights.common.EffectInsights;
-import fuzs.effectinsights.common.client.gui.tooltip.MobEffectTooltipLines;
-import fuzs.effectinsights.common.client.handler.EffectTooltipHandler;
-import fuzs.effectinsights.common.client.handler.FoodTooltipHandler;
+import fuzs.effectinsights.common.client.handler.EffectItemTooltipHandler;
+import fuzs.effectinsights.common.client.handler.EffectWidgetTooltipHandler;
+import fuzs.effectinsights.common.client.handler.FoodItemTooltipHandler;
 import fuzs.effectinsights.common.config.ClientConfig;
 import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import fuzs.puzzleslib.common.api.client.event.v1.gui.GatherEffectScreenTooltipCallback;
 import fuzs.puzzleslib.common.api.client.event.v1.gui.ItemTooltipCallback;
 import fuzs.puzzleslib.common.api.event.v1.core.EventPhase;
 import fuzs.tooltipinsights.common.api.v1.client.handler.TooltipDescriptionsHandler;
+import fuzs.tooltipinsights.common.api.v1.config.TooltipDescriptionMode;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -24,23 +25,24 @@ public class EffectInsightsClient implements ClientModConstructor {
     @Override
     public void onConstructMod() {
         registerEventHandlers();
+        TooltipDescriptionsHandler.printMissingDescriptionWarnings(Registries.MOB_EFFECT,
+                (Holder.Reference<MobEffect> holder) -> holder.value().getDescriptionId());
     }
 
     private static void registerEventHandlers() {
-        ItemTooltipCallback.EVENT.register(EventPhase.LAST, EffectTooltipHandler.INSTANCE::onItemTooltip);
-        ItemTooltipCallback.EVENT.register(EventPhase.AFTER, FoodTooltipHandler::onItemTooltip);
-        GatherEffectScreenTooltipCallback.EVENT.register((AbstractContainerScreen<?> screen, MobEffectInstance mobEffect, List<Component> tooltipLines) -> {
-            // TODO add a disabled option, which is then split from not being active to prevent vanilla
-            if (EffectInsights.CONFIG.get(ClientConfig.class).effectWidgetTooltips.itemDescriptions.isActive()) {
-                tooltipLines.clear();
-                tooltipLines.addAll(MobEffectTooltipLines.getMobEffectWidgetTooltipLines(mobEffect));
-            }
-        });
+        ItemTooltipCallback.EVENT.register(EventPhase.LAST, EffectItemTooltipHandler.INSTANCE::onItemTooltip);
+        ItemTooltipCallback.EVENT.register(EventPhase.AFTER, FoodItemTooltipHandler::onItemTooltip);
+        GatherEffectScreenTooltipCallback.EVENT.register(EffectInsightsClient::onGatherEffectScreenTooltip);
     }
 
-    @Override
-    public void onClientSetup() {
-        TooltipDescriptionsHandler.printMissingDescriptionWarnings(Registries.MOB_EFFECT,
-                (Holder.Reference<MobEffect> holder) -> holder.value().getDescriptionId());
+    private static void onGatherEffectScreenTooltip(AbstractContainerScreen<?> screen, MobEffectInstance mobEffect, List<Component> tooltipLines) {
+        if (EffectInsights.CONFIG.get(ClientConfig.class).effectWidgetTooltips.tooltipDescriptions
+                == TooltipDescriptionMode.DISABLED) {
+            return;
+        }
+
+        tooltipLines.clear();
+        tooltipLines.add(mobEffect.getEffect().value().getDisplayName());
+        new EffectWidgetTooltipHandler(mobEffect).onGatherTooltipComponents(screen.minecraft, tooltipLines);
     }
 }
