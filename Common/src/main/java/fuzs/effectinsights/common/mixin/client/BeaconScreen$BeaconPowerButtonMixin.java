@@ -1,9 +1,10 @@
 package fuzs.effectinsights.common.mixin.client;
 
 import fuzs.effectinsights.common.EffectInsights;
-import fuzs.effectinsights.common.client.handler.BeaconTooltipHandler;
+import fuzs.effectinsights.common.client.handler.SingleEffectTooltipHandler;
 import fuzs.effectinsights.common.config.ClientConfig;
 import fuzs.puzzleslib.common.api.client.gui.v2.tooltip.TooltipBuilder;
+import fuzs.tooltipinsights.common.api.v1.config.StyledTooltipsConfig;
 import fuzs.tooltipinsights.common.api.v1.config.TooltipDescriptionMode;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.screens.inventory.BeaconScreen;
@@ -53,7 +54,12 @@ abstract class BeaconScreen$BeaconPowerButtonMixin extends AbstractButton {
             MobEffectInstance mobEffect = new MobEffectInstance(effect,
                     0,
                     this.effectinsights$getBeaconEffectAmplifier(effect));
-            new BeaconTooltipHandler(mobEffect).onGatherTooltipComponents(this.this$0.minecraft, tooltipLines);
+            new SingleEffectTooltipHandler(mobEffect) {
+                @Override
+                protected StyledTooltipsConfig<ClientConfig.EffectTooltipComponents> getStyleConfig() {
+                    return EffectInsights.CONFIG.get(ClientConfig.class).effectBeaconTooltips;
+                }
+            }.onGatherTooltipComponents(this.this$0.minecraft, tooltipLines);
             return tooltipLines;
         }).build(this);
     }

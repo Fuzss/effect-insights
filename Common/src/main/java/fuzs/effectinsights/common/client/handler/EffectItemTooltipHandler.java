@@ -4,29 +4,27 @@ import fuzs.effectinsights.common.EffectInsights;
 import fuzs.effectinsights.common.client.gui.component.EffectComponents;
 import fuzs.effectinsights.common.client.gui.tooltip.MobEffectTooltipLines;
 import fuzs.effectinsights.common.config.ClientConfig;
-import fuzs.tooltipinsights.common.api.v1.client.gui.tooltip.TooltipLinesExtractor;
 import fuzs.tooltipinsights.common.api.v1.client.handler.TooltipDescriptionsHandler;
-import fuzs.tooltipinsights.common.api.v1.config.TooltipDescriptionMode;
+import fuzs.tooltipinsights.common.api.v1.config.StyledTooltipsConfig;
+import fuzs.tooltipinsights.common.api.v1.config.TooltipComponentsConfig;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public final class EffectItemTooltipHandler extends TooltipDescriptionsHandler<MobEffectInstance> {
-    public static final TooltipDescriptionsHandler<MobEffectInstance> INSTANCE = new EffectItemTooltipHandler();
+public final class EffectItemTooltipHandler extends TooltipDescriptionsHandler<MobEffectInstance, TooltipComponentsConfig> {
+    public static final TooltipDescriptionsHandler<MobEffectInstance, TooltipComponentsConfig> INSTANCE = new EffectItemTooltipHandler();
 
     private EffectItemTooltipHandler() {
-        // NO-OP
+        super(MobEffectTooltipLines.ITEM_SUPPLIERS);
     }
 
     @Override
-    protected TooltipDescriptionMode getTooltipDescriptionMode() {
-        return EffectInsights.CONFIG.get(ClientConfig.class).effectItemTooltips.tooltipDescriptions;
+    protected StyledTooltipsConfig<TooltipComponentsConfig> getStyleConfig() {
+        return EffectInsights.CONFIG.get(ClientConfig.class).effectItemTooltips;
     }
 
     @Override
@@ -36,11 +34,5 @@ public final class EffectItemTooltipHandler extends TooltipDescriptionsHandler<M
                 .collect(Collectors.toMap(MobEffectInstance::getDescriptionId,
                         Function.identity(),
                         (MobEffectInstance o1, MobEffectInstance o2) -> o2));
-    }
-
-    @Override
-    protected List<Component> getItemTooltipLines(MobEffectInstance mobEffectInstance) {
-        return TooltipLinesExtractor.getTooltipLines(MobEffectTooltipLines.ITEM_SUPPLIERS, mobEffectInstance,
-                EffectInsights.CONFIG.get(ClientConfig.class).effectItemTooltips);
     }
 }
