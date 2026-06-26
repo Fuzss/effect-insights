@@ -13,14 +13,6 @@
     },
     "dependencies": [
         {
-            "name": "tooltipinsights",
-            "type": "embedded",
-            "platforms": [
-                "fabric",
-                "neoforge"
-            ]
-        },
-        {
             "name": "fabricapi",
             "type": "required",
             "platforms": [
@@ -37,6 +29,14 @@
         {
             "name": "puzzleslib",
             "type": "required",
+            "platforms": [
+                "fabric",
+                "neoforge"
+            ]
+        },
+        {
+            "name": "tooltipinsights",
+            "type": "embedded",
             "platforms": [
                 "fabric",
                 "neoforge"
