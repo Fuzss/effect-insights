@@ -27,7 +27,7 @@ public abstract class SingleEffectTooltipHandler extends TooltipDescriptionsHand
 
     @Override
     protected @Nullable Component getValueComponent(MobEffectInstance mobEffect) {
-        int maxWidth = this.getStyleConfig().tooltipLines.maximumWidth;
+        int maxWidth = this.getStyleConfig().tooltipLines().maximumWidth;
         return MobEffectTooltipLines.DISPLAY_NAME.getTooltipLines(mobEffect, maxWidth).findFirst().orElse(null);
     }
 }
