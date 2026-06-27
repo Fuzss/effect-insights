@@ -6,21 +6,34 @@ import fuzs.tooltipinsights.common.api.v1.config.StyledTooltipsConfig;
 import fuzs.tooltipinsights.common.api.v1.config.TooltipComponentsConfig;
 
 public class ClientConfig implements ConfigCore {
-    @Config
-    public final StyledTooltipsConfig<EffectTooltipComponents> effectWidgetTooltips = new StyledTooltipsConfig<>(new EffectTooltipComponents());
-    @Config
+    @Config(description = "Controls effect descriptions shown when hovering effect widgets in the player inventory screen.")
+    public final StyledTooltipsConfig<EffectTooltipComponents> effectWidgetTooltips = new SingleEffectTooltips();
+    @Config(description = "Controls effect descriptions shown on item tooltips.")
     public final EffectItemTooltips effectItemTooltips = new EffectItemTooltips();
-    @Config
-    public final StyledTooltipsConfig<EffectTooltipComponents> effectBeaconTooltips = new StyledTooltipsConfig<>(new EffectTooltipComponents());
+    @Config(description = "Controls effect descriptions shown when hovering effect buttons in the beacon screen.")
+    public final StyledTooltipsConfig<EffectTooltipComponents> effectBeaconTooltips = new SingleEffectTooltips();
+
+    public static class SingleEffectTooltips extends StyledTooltipsConfig<EffectTooltipComponents> {
+        @Config(description = "Controls text lines added to effect description tooltips.")
+        public final EffectTooltipComponents widgetTooltipLines = new EffectTooltipComponents();
+
+        @Override
+        public EffectTooltipComponents tooltipLines() {
+            return this.widgetTooltipLines;
+        }
+    }
 
     public static class EffectItemTooltips extends StyledTooltipsConfig<TooltipComponentsConfig> {
-        @Config
+        @Config(description = "Add effect descriptions to certain item groups.")
         public final EffectDescriptionTargets itemDescriptionTargets = new EffectDescriptionTargets();
+        @Config(description = "Controls text lines added to effect description tooltips.")
+        public final TooltipComponentsConfig itemTooltipLines = new TooltipComponentsConfig();
         @Config(description = "Display potion effects for consumable item tooltips, such as food or the totem of undying.")
         public boolean consumablesEffectTooltips = true;
 
-        public EffectItemTooltips() {
-            super(new TooltipComponentsConfig());
+        @Override
+        public TooltipComponentsConfig tooltipLines() {
+            return this.itemTooltipLines;
         }
     }
 
