@@ -7,11 +7,11 @@ import fuzs.tooltipinsights.common.api.v1.config.TooltipComponentsConfig;
 
 public class ClientConfig implements ConfigCore {
     @Config(description = "Controls effect descriptions shown when hovering effect widgets in the player inventory screen.")
-    public final StyledTooltipsConfig<EffectTooltipComponents> effectWidgetTooltips = new SingleEffectTooltips();
+    public final SingleEffectTooltips effectWidgetTooltips = new SingleEffectTooltips();
     @Config(description = "Controls effect descriptions shown on item tooltips.")
     public final EffectItemTooltips effectItemTooltips = new EffectItemTooltips();
     @Config(description = "Controls effect descriptions shown when hovering effect buttons in the beacon screen.")
-    public final StyledTooltipsConfig<EffectTooltipComponents> effectBeaconTooltips = new SingleEffectTooltips();
+    public final SingleEffectTooltips effectBeaconTooltips = new SingleEffectTooltips();
 
     public static class SingleEffectTooltips extends StyledTooltipsConfig<EffectTooltipComponents> {
         @Config(description = "Controls text lines added to effect description tooltips.")
