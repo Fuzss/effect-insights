@@ -6,11 +6,17 @@
     "26.1.x": "maintained",
     "26.2.x": "primary"
   },
-  "properties": {
-    "distributions.curseforge.id": "891326",
-    "distributions.curseforge.slug": "effect-insights",
-    "distributions.github.slug": "effect-insights",
-    "distributions.modrinth.id": "Kw73iLDq",
-    "distributions.modrinth.slug": "effect-insights"
+  "distributions": {
+    "curseforge": {
+      "id": "891326",
+      "slug": "effect-insights"
+    },
+    "github": {
+      "slug": "effect-insights"
+    },
+    "modrinth": {
+      "id": "Kw73iLDq",
+      "slug": "effect-insights"
+    }
   }
 }
