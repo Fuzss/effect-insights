@@ -5,6 +5,7 @@ import fuzs.effectinsights.common.config.ClientConfig;
 import fuzs.tooltipinsights.common.api.v1.client.handler.TooltipDescriptionsHandler;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.Nullable;
@@ -21,8 +22,9 @@ public abstract class SingleEffectTooltipHandler extends TooltipDescriptionsHand
     }
 
     @Override
-    protected Map<Component, MobEffectInstance> getByName(ItemStack itemStack, HolderLookup.Provider registries) {
-        return Collections.singletonMap(this.mobEffect.getEffect().value().getDisplayName(), this.mobEffect);
+    protected Map<ComponentContents, MobEffectInstance> getByName(ItemStack itemStack, HolderLookup.Provider registries) {
+        return Collections.singletonMap(this.mobEffect.getEffect().value().getDisplayName().getContents(),
+                this.mobEffect);
     }
 
     @Override
