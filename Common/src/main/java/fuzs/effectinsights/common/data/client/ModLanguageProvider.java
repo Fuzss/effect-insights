@@ -1,7 +1,8 @@
 package fuzs.effectinsights.common.data.client;
 
-import fuzs.puzzleslib.common.api.client.data.v2.AbstractLanguageProvider;
-import fuzs.puzzleslib.common.api.data.v2.core.DataProviderContext;
+import fuzs.puzzleslib.common.api.client.data.v3.language.AbstractLanguageProvider;
+import fuzs.puzzleslib.common.api.client.data.v3.language.TranslationBuilder;
+import fuzs.puzzleslib.common.api.data.v3.core.DataProviderContext;
 import net.minecraft.world.effect.MobEffects;
 
 public class ModLanguageProvider extends AbstractLanguageProvider {
@@ -11,9 +12,9 @@ public class ModLanguageProvider extends AbstractLanguageProvider {
     }
 
     @Override
-    public void addTranslations(TranslationBuilder translationBuilder) {
-        this.addVanillaEffects(translationBuilder);
-        this.addModEffects(translationBuilder);
+    public void addTranslations() {
+        this.addVanillaEffects(this);
+        this.addModEffects(this);
     }
 
     private void addVanillaEffects(TranslationBuilder translationBuilder) {

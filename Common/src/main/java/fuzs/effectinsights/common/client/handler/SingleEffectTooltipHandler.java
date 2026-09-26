@@ -21,12 +21,12 @@ public abstract class SingleEffectTooltipHandler extends TooltipDescriptionsHand
     }
 
     @Override
-    protected Map<String, MobEffectInstance> getByDescriptionId(ItemStack itemStack, HolderLookup.Provider registries) {
-        return Collections.singletonMap(this.mobEffect.getDescriptionId(), this.mobEffect);
+    protected Map<Component, MobEffectInstance> getByName(ItemStack itemStack, HolderLookup.Provider registries) {
+        return Collections.singletonMap(this.mobEffect.getEffect().value().getDisplayName(), this.mobEffect);
     }
 
     @Override
-    protected @Nullable Component getValueComponent(MobEffectInstance mobEffect) {
+    protected @Nullable Component getNameComponent(Component originalName, MobEffectInstance mobEffect) {
         int maxWidth = this.getStyleConfig().tooltipLines().maximumWidth;
         return MobEffectTooltipLines.DISPLAY_NAME.getTooltipLines(mobEffect, maxWidth).findFirst().orElse(null);
     }

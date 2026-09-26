@@ -84,8 +84,10 @@ public class FoodItemTooltipHandler {
         return tooltipLines.stream().mapMulti((Component component, Consumer<TranslatableContents> consumer) -> {
             TooltipDescriptionsHandler.modifyTranslatableContents(component,
                     UnaryOperator.identity(),
-                    (TranslatableContents translatableContents, UnaryOperator<Component> contentsGatherer) -> {
-                        consumer.accept(translatableContents);
+                    (Component tooltipComponent, UnaryOperator<Component> contentsGatherer) -> {
+                        if (tooltipComponent.getContents() instanceof TranslatableContents translatableContents) {
+                            consumer.accept(translatableContents);
+                        }
                         return false;
                     });
         }).map(TranslatableContents::getKey).collect(Collectors.toSet());
